@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>
+			Sharon Jacob
+		</title>
+	</head>
+	<body>
+	  
+		Programme : Bcom Business Analytics<br>
+		Semester&nbsp;&nbsp;: First Semester<br>
+		Emailid &nbsp;&nbsp;&nbsp;&nbsp;:bcomg2543@rajagiri.edu<br>
+		PhNo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:8891459878<br>
+	</body>
+</html>

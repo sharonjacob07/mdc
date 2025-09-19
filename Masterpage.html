@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Personal Website</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #444;
+    }
+	
+    nav a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: #666;
+    }
+
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to My Personal Website</h1>
+  </header>
+
+  <nav>
+    <a href="home.html" target="contentFrame">Home</a>
+    <a href="hobbies.html" target="contentFrame">My Hobbies</a>
+    <a href="qualifications.html" target="contentFrame">Qualifications</a>
+    <a href="extracurricular.html" target="contentFrame">Extracurricular</a>
+    <a href="home-details.html" target="contentFrame">Home Details</a>
+    <a href="contact.html" target="contentFrame">Contact Me</a>
+  </nav>
+
+  <iframe name="contentFrame" src="home.html"></iframe>
+
+  <footer>
+    <p>© 2025 Your Name | All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

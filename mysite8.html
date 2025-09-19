@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharon's Profile - Cyber-Synth Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Neon Palette - Teal, Blue, and Light Purple */
+            --bg-dark: #121212; /* Deep charcoal */
+            --neon-teal: #00E0E0; /* Vibrant Teal */
+            --neon-blue: #00BFFF; /* Sky Blue */
+            --neon-purple: #C875F7; /* Light Purple */
+            --text-light: #E0E0E0;
+            --card-bg: #1e1e1e;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            scroll-behavior: smooth;
+            transition: background-color 0.5s, color 0.5s;
+        }
+        
+        /* --- Dark Mode (default) styles follow the root variables --- */
+        
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue), 0 0 10px rgba(0, 191, 255, 0.4) inset; /* Blue glow */
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 25px var(--neon-purple), 0 0 15px rgba(200, 117, 247, 0.6) inset; /* Purple glow */
+            transform: translateY(-5px);
+        }
+
+        .section-heading {
+            font-family: 'Orbitron', sans-serif;
+            background-image: linear-gradient(45deg, var(--neon-teal), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 8px var(--neon-teal), 0 0 15px var(--neon-blue); /* Subtle combined glow */
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--neon-purple);
+            text-shadow: 0 0 5px var(--neon-purple);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--neon-teal), var(--neon-purple));
+            transform: scaleX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-link:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-teal));
+            color: var(--bg-dark);
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--neon-purple);
+            animation: pulse-glow 1.5s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-blue);
+            }
+            50% {
+                box-shadow: 0 0 20px var(--neon-purple), 0 0 40px var(--neon-blue);
+            }
+            100% {
+                box-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-blue);
+            }
+        }
+
+        /* Dark Mode Toggle Switch */
+        .toggle-container {
+            margin-left: 1.5rem;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #555;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #fff;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background: linear-gradient(45deg, var(--neon-teal), var(--neon-blue));
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+            background-color: var(--neon-purple);
+        }
+
+        /* NEW: Light Mode Styles */
+        body[data-theme="light"] {
+            background-color: #f0f4f8; /* Soft light gray */
+            color: #1a202c; /* Dark text for contrast */
+        }
+        body[data-theme="light"] .card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        body[data-theme="light"] .section-heading {
+            color: #1a202c;
+            text-shadow: none;
+            background-image: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+        }
+        body[data-theme="light"] .nav-link {
+            color: #4a5568;
+        }
+        body[data-theme="light"] .nav-link:hover {
+            color: #8b5cf6; /* A pleasing purple */
+            text-shadow: none;
+        }
+        body[data-theme="light"] .nav-link::before {
+            background: linear-gradient(to right, #60a5fa, #8b5cf6);
+        }
+        body[data-theme="light"] .btn-primary {
+            background: #60a5fa;
+            color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        body[data-theme="light"] .btn-primary:hover {
+            background: #818cf8;
+            box-shadow: 4px 10px rgba(0,0,0,0.2);
+            animation: none;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <header class="bg-black bg-opacity-70 backdrop-filter backdrop-blur-lg sticky top-0 z-50 shadow-lg border-b-2 border-neon-blue">
+        <nav class="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center">
+            <h1 class="text-3xl font-bold section-heading">Sharon's Profile</h1>
+            <div class="flex flex-wrap justify-center mt-4 sm:mt-0 space-x-4">
+                <a href="#home" class="nav-link text-lg font-medium text-gray-300 hover:text-white" onclick="showSection('home')">Home</a>
+                <a href="#qualifications" class="nav-link text-lg font-medium text-gray-300 hover:text-white" onclick="showSection('qualifications')">Qualifications</a>
+                <a href="#hobbies" class="nav-link text-lg font-medium text-gray-300 hover:text-white" onclick="showSection('hobbies')">Hobbies</a>
+                <a href="#extracurricular" class="nav-link text-lg font-medium text-gray-300 hover:text-white" onclick="showSection('extracurricular')">Extracurricular</a>
+                <a href="#homedetails" class="nav-link text-lg font-medium text-gray-300 hover:text-white" onclick="showSection('homedetails')">Home Details</a>
+                <a href="#contact" class="nav-link text-lg font-medium text-gray-300 hover:text-white" onclick="showSection('contact')">Contact Me</a>
+                <div class="toggle-container">
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-6 sm:p-8 space-y-20">
+
+        <section id="home" class="section-container flex flex-col lg:flex-row items-center justify-center min-h-screen">
+            <div class="w-full lg:w-1/2 p-4 lg:pr-12">
+                <h2 class="text-5xl font-extrabold text-white leading-tight section-heading">Welcome to My World</h2>
+                <p class="mt-6 text-xl text-gray-400">
+                    Hello! I'm a passionate individual with a keen interest in technology, nature, and continuous learning. This website serves as a digital portfolio to share a bit about my life, my achievements, and my passions.
+                </p>
+                <div class="mt-8 flex space-x-4">
+                    <a href="#contact" onclick="showSection('contact')" class="btn-primary px-8 py-3 rounded-full font-bold">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="qualifications" class="section-container hidden min-h-screen pt-20">
+            <div class="card p-8 rounded-3xl">
+                <h2 class="text-4xl font-bold text-center mb-10 section-heading">My Qualifications</h2>
+                <ul class="space-y-6 text-lg text-gray-400">
+                    <li class="p-6 rounded-xl transform transition-transform duration-300 hover:scale-105 border-l-4 border-neon-teal bg-gray-800 hover:bg-gray-700">
+                        <h3 class="text-xl font-semibold mb-2 text-neon-blue">Education</h3>
+                        <p>First Year BCom Student at Rajagiri College Of Social Sciences.</p>
+                    </li>
+                    <li class="p-6 rounded-xl transform transition-transform duration-300 hover:scale-105 border-l-4 border-neon-teal bg-gray-800 hover:bg-gray-700">
+                        <p>CBSE 12th, Graduated from GoodShepherd Public School.</p>
+                    </li>
+                    <li class="p-6 rounded-xl transform transition-transform duration-300 hover:scale-105 border-l-4 border-neon-teal bg-gray-800 hover:bg-gray-700">
+                        <p>CBSE 10th, GoodShepherd Public School.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="hobbies" class="section-container hidden min-h-screen pt-20">
+            <div class="card p-8 rounded-3xl">
+                <h2 class="text-4xl font-bold text-center mb-10 section-heading">My Hobbies</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="flex flex-col items-center text-center p-6 bg-gray-800 rounded-xl transition-transform duration-300 hover:scale-105 hover:bg-gray-700 border-2 border-transparent hover:border-neon-purple">
+                        <svg class="w-16 h-16 text-neon-blue mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v-6h-2v6zm0-8h2V7h-2v2z"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-neon-teal">Reading</h3>
+                        <p class="text-gray-400">Exploring new worlds and ideas through literature.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-6 bg-gray-800 rounded-xl transition-transform duration-300 hover:scale-105 hover:bg-gray-700 border-2 border-transparent hover:border-neon-purple">
+                        <svg class="w-16 h-16 text-neon-blue mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M15 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-9 6c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-neon-teal">Drawing</h3>
+                        <p class="text-gray-400">Creating moments and preserving memories.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-6 bg-gray-800 rounded-xl transition-transform duration-300 hover:scale-105 hover:bg-gray-700 border-2 border-transparent hover:border-neon-purple">
+                        <svg class="w-16 h-16 text-neon-blue mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-4-12h8v2h-8v-2zm0 4h8v2h-8v-2zm0 4h8v2h-8v-2z"></path>
+                        </svg>
+                        <h3 class="text-xl font-semibold mb-2 text-neon-teal">Traveling</h3>
+                        <p class="text-gray-400">Discovering new cultures and breathtaking landscapes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="extracurricular" class="section-container hidden min-h-screen pt-20">
+            <div class="card p-8 rounded-3xl">
+                <h2 class="text-4xl font-bold text-center mb-10 section-heading">Extracurricular Activities</h2>
+                <ul class="space-y-6 text-lg text-gray-400">
+                    <li class="p-6 rounded-xl transform transition-transform duration-300 hover:scale-105 border-l-4 border-neon-teal bg-gray-800 hover:bg-gray-700">
+                        <h3 class="text-xl font-semibold mb-2 text-neon-blue">E-Commerce Club</h3>
+                        <p>A member for the college's e-commerce club that works on powering and commencement of online businesses.</p>
+                    </li>
+                    <li class="p-6 rounded-xl transform transition-transform duration-300 hover:scale-105 border-l-4 border-neon-teal bg-gray-800 hover:bg-gray-700">
+                        <h3 class="text-xl font-semibold mb-2 text-neon-blue">Debate Competitions</h3>
+                        <p>Actively engaged in interschool commerce fests and tournaments.</p>
+                    </li>
+                    <li class="p-6 rounded-xl transform transition-transform duration-300 hover:scale-105 border-l-4 border-neon-teal bg-gray-800 hover:bg-gray-700">
+                        <h3 class="text-xl font-semibold mb-2 text-neon-blue">Art Competitions</h3>
+                        <p>Have participated in both digital arts competitions as well as pencil drawing competitions.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="homedetails" class="section-container hidden min-h-screen pt-20">
+            <div class="card p-8 rounded-3xl">
+                <h2 class="text-4xl font-bold text-center mb-10 section-heading">Home Details</h2>
+                <div class="flex flex-col lg:flex-row items-center justify-center space-y-8 lg:space-y-0 lg:space-x-8">
+                    <img src="alleppey.jpeg" alt="A serene backwater scene in Alappuzha, Kerala" class="rounded-xl shadow-2xl max-w-full lg:max-w-md border-4 border-neon-teal">
+                    <div class="w-full lg:w-1/2 text-lg text-gray-400 space-y-4">
+                        <p class="leading-relaxed">
+                            I am originally from Alappuzha, a beautiful district in the state of Kerala, India. Known as the 'Venice of the East', Alappuzha is famous for its serene backwaters, intricate network of canals, and lush greenery. The backwaters are a defining feature of the region, where life revolves around the water, from transportation to agriculture.
+                        </p>
+                        <p class="leading-relaxed">
+                            The picture on the left captures the tranquility of the backwaters, with a traditional houseboat gracefully gliding through the calm waters, surrounded by palm trees. This is a place that truly feels like home.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-container hidden min-h-screen pt-20">
+            <div class="card p-8 rounded-3xl text-center">
+                <h2 class="text-4xl font-bold mb-10 section-heading">Contact Me</h2>
+                <p class="text-lg text-gray-400 mb-8">
+                    Feel free to reach out to me via email, phone, or connect with me on social media.
+                </p>
+                <div class="space-y-6">
+                    <div>
+                        <a href="mailto:sharonkalam07@gmail.com" class="text-neon-teal hover:text-neon-purple transition-colors duration-200">
+                            <span class="block text-2xl font-semibold">sharonkalam07@gmail.com</span>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="tel:+91 88914 59878" class="text-neon-teal text-lg font-semibold hover:text-neon-purple transition-colors duration-200">+91 88914 59878</a>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center space-x-4 mt-6">
+                    <a href="https://www.instagram.com/__sharon_jacob__" class="text-gray-400 hover:text-neon-purple transition-colors duration-200">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.858.07c3.273.142 4.077.72 4.664 1.297.587.577 1.156 1.391 1.297 4.664.058 1.274.07 1.654.07 4.858s-.012 3.584-.07 4.858c-.142 3.273-.72 4.077-1.297 4.664-.577.587-1.391 1.156-4.664 1.297-1.274.058-1.654-.07-4.858-.07s-3.584-.012-4.858-.07c-3.273-.142-4.077-.72-4.664-1.297-.587-.577-1.156-1.391-1.297-4.664-.058-1.274-.07-1.654-.07-4.858s.012-3.584.07-4.858c.142-3.273.72-4.077 1.297-4.664.577-.587 1.391-1.156 4.664-1.297 1.274-.058 1.654-.07 4.858-.07zm0 17.838c4.015 0 7.288-3.273 7.288-7.288s-3.273-7.288-7.288-7.288-7.288 3.273-7.288 7.288 3.273 7.288 7.288 7.288zm5.992-12.984c-.815 0-1.478.663-1.478 1.478s.663 1.478 1.478 1.478 1.478-.663 1.478-1.478-.663-1.478-1.478-1.478zm-5.992 9.444c-2.481 0-4.505-2.025-4.505-4.505s2.024-4.505 4.505-4.505 4.505 2.025 4.505 4.505-2.024 4.505-4.505 4.505z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com" class="text-gray-400 hover:text-neon-blue transition-colors duration-200">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.356L14.735 10l7.731 11.25h-6.27l-5.694-8.73L4.475 22.25H1.119l8.038-11.666L1.119 2.25h6.518l4.47 6.471L18.244 2.25zM12.915 11.458L3.483 2.5h-1.6L12.016 11.458h.9zM18.847 21.5L8.434 10.518H7.534l10.813 10.982h1.5z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="bg-gray-800 text-gray-400 text-center p-6 mt-8">
+            <p class="text-sm">&copy; 2025 My Website. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        const sections = ['home', 'qualifications', 'hobbies', 'extracurricular', 'homedetails', 'contact'];
+
+        function showSection(sectionId) {
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) {
+                    section.style.opacity = '0';
+                    setTimeout(() => {
+                        if (id === sectionId) {
+                            section.classList.remove('hidden');
+                            section.style.opacity = '1';
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    }, 500); // Wait for fade-out to finish
+                }
+            });
+            history.pushState(null, '', `#${sectionId}`);
+        }
+
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (sections.includes(hash)) {
+                showSection(hash);
+            } else {
+                showSection('home');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialHash = window.location.hash.substring(1);
+            if (sections.includes(initialHash)) {
+                document.getElementById(initialHash).style.opacity = '1';
+                showSection(initialHash);
+            } else {
+                document.getElementById('home').style.opacity = '1';
+                showSection('home');
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.setAttribute('data-theme', 'light');
+                document.getElementById('darkModeToggle').checked = true;
+            }
+        });
+
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
+        darkModeToggle.addEventListener('change', () => {
+            if (darkModeToggle.checked) {
+                document.body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
